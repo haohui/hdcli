@@ -1,0 +1,17 @@
+editor:
+  /Applications/Emacs.app/Contents/MacOS/Emacs-10.7 -nw
+
+hadoop_repo_directory:
+  <your directory of the hadoop repository>
+
+svn_base_uri: https://svn.apache.org/repos/asf/hadoop/common
+jira_base_uri: https://issues.apache.org/jira
+
+svn_binary:
+  /usr/bin/svn
+
+test_compile_command:
+  /usr/local/bin/mvn clean install -q -DskipTests -Dmaven.javadoc.skip=true -Djava.awt.headless=true
+
+jira_username: <your jira ID>
+jira_password: <your jira password>
