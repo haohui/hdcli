@@ -8,6 +8,7 @@ An CLI tool to commit code and resolve jiras.
 
 Supported subcommands:
 
+  commit         Commit a changeset locally
   merge          Merge a changeset into a branch
   upload         Upload a file to a specific jira
   resolve-jira   Mark a jira as reviewed and resolved
@@ -15,7 +16,7 @@ Supported subcommands:
 Run `hdcli <op> --help` to for help on specific subcommands.
 """
 
-commands = { 'merge', 'upload', 'resolve-jira' }
+commands = { 'commit', 'merge', 'upload', 'resolve-jira' }
 
 if len(sys.argv) == 1 or sys.argv[1] not in commands:
     print USAGE
@@ -24,7 +25,11 @@ if len(sys.argv) == 1 or sys.argv[1] not in commands:
 cmd = sys.argv[1]
 conf = yaml.load(open(os.path.expanduser('~/.hdcli/config.yaml')))
 
-if cmd == 'merge':
+if sys.argv[1] == 'commit':
+    sys.argv = sys.argv[1:]
+    from hdcli import commit
+    commit.run(conf, sys.argv)
+elif cmd == 'merge':
     sys.argv = sys.argv[1:]
     from hdcli import merge
     merge.run(conf, sys.argv)
